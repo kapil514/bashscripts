@@ -41,7 +41,6 @@ cat $ALLOUTPUT | grep -v OK |grep -v INFO > $FAILEDOUTPUT
 
 if [ -s "$FAILEDOUTPUT" ]; then
 cat $FAILEDOUTPUT >> $FAILEDTMP
-#cat $FAILEDTMP |/opt/totality/bin/mutt -s "FAILED Batteries/Capacitors Report" parvez.hussain@one.verizon.com
-cat $FAILEDTMP |/opt/totality/bin/mutt -s "FAILED Batteries/Capacitors/Controller/Cache Report" bbyces@lists.verizonbusiness.com bbycxs@lists.verizonbusiness.com sakru.vankudoth@one.verizon.com
-#cat $FAILEDTMP |/opt/totality/bin/mutt -s "FAILED Batteries/Capacitors/Controller/Cache Report" sourabh.sinha@intl.verizon.com
+cat $FAILEDTMP |/opt/totality/bin/mutt -s "FAILED Batteries/Capacitors/Controller/Cache Report" email1@domain.com email12@domain.com 
+#cat $FAILEDTMP |/opt/totality/bin/mutt -s "FAILED Batteries/Capacitors/Controller/Cache Report" emailid@domain.com
 fi
