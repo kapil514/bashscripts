@@ -12,4 +12,6 @@ PATH=/var/log
 cd=$PATH
 find . -mtime +5 -type -exec lsof {} \; > file.txt
 find . -mtime +5 -type -f | xargs ls -ltr | awk '{print "./"$9}' >>file.txt
-[root@redhat2 ~]# 
+
+##Cronjob for zipping logs
+##15 01 * * * find /var/logs/tomcat/`hostname`/bbchkp-app* -name "cto-agg-application.log.*" -type f -mtime +5 -exec rm {} \;;find /var/logs/tomcat/`hostname`/bbchkp-app* -name "cto-agg-application.log.*" -a  ! \( -iname "*.gz" -o -name "*.zip" \) -type f -mtime +1 -exec /bin/gzip -9f {} \;
