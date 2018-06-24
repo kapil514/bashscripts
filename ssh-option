@@ -1,0 +1,15 @@
+ConnectionAttempts
+                   ConnectTimeout
+
+				   
+				   
+				   
+for i in `cat server_kapil`
+do
+ssh -o ConnectTimeout=5 $i || echo $i >> failserver;ssh -o ConnectTimeout=5 $i "uname"&& echo $i >> successserver
+done
+
+for i in `server_kapil` ; do
+    ssh-keyscan $i 2>&1 | grep -v "^$" > /dev/null
+    [ $? == 0 ] && echo $i >> successserver 2>&1 || echo $i >> failserver 2>&1
+	 done
