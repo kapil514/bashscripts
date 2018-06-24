@@ -1,0 +1,46 @@
+#!/bin/bash 
+cpw=`echo U2FsdGVkX18nH/llJf50h94o05iIbqw4HytJZw8Hhvs= | openssl enc -aes-128-cbc -a -d -salt -pass pass:asdffdsa`
+wpw=`echo U2FsdGVkX19qW9TqdAQpOejXWz5TPe84OiW1w2dKrwQEvuCrd77lX2l+vV/NcM9i | openssl enc -aes-128-cbc -a -d -salt -pass pass:asdffdsa`
+#echo "Connecting to $1"
+serverid=$1
+case $serverid in
+p*)
+if [ ! -z "$serverid" ]
+then
+echo "Connecting to chsnmvproc$1"
+pserverid=${serverid:1}
+sshpass -p $cpw ssh -o StrictHostKeyChecking=no -o ConnectTimeout=20 -l ciuser chsnmvproc$pserverid.usdc2.oraclecloud.com
+fi
+;;
+a*)
+if [ ! -z "$serverid" ];then
+aserverid=${serverid:1}
+echo "Connecting to chsnmvapp$1"
+sshpass -p $wpw ssh -o StrictHostKeyChecking=no -o ConnectTimeout=20 -l ciuser chsnmvapp$aserverid.usdc2.oraclecloud.com
+fi
+;;
+h*)
+if [ ! -z "$serverid" ];then
+hserverid=${serverid:1}
+echo "Connecting to chsnmphbase$1"
+sshpass -p $cpw ssh -o StrictHostKeyChecking=no -o ConnectTimeout=20 -l ciuser chsnmphbase$hserverid.usdc2.oraclecloud.com
+fi
+;;
+s*)
+if [ ! -z "$serverid" ];then
+sserverid=${serverid:1}
+echo "Connecting to chsnmpsolr$1"
+sshpass -p $cpw ssh -o StrictHostKeyChecking=no -o ConnectTimeout=20 -l ciuser chsnmpsolr$sserverid.usdc2.oraclecloud.com
+fi
+;;
+k*)
+if [ ! -z "$serverid" ];then
+kserverid=${serverid:1}
+echo "Connecting to chsnmpkafka$1"
+sshpass -p $cpw ssh -o StrictHostKeyChecking=no -o ConnectTimeout=20 -l ciuser chsnmpkafka$kserverid.usdc2.oraclecloud.com
+fi
+;;
+*)
+echo "provide valid server id Eg; Proc server <<chsnmvproc12vm1.usdc2.oraclecloud.com>>:p12vm1 OR app server <<chsnmvapp1vm1>> : a1vm1 OR hbase Server <<chsnmphbase19>> : h19 OR Solr  <<chsnmpsolr34>>:s34"
+;;
+esac
