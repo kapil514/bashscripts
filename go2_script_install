@@ -1,0 +1,12 @@
+#!/bin/bash
+rpm -qa | grep sshpass > /dev/null
+if [ $? -ne 0 ];then
+echo "ssh pass rpm not found Downloading the rpm file"
+wget -q <<RPM_URL>> -O ~/sshpass.rpm --no-proxy
+sudo rpm -ivh ~/sshpass.rpm
+fi
+[ ! -d $HOME/script ] && mkdir $HOME/script
+wget -q http://ci-yum.oracle.com/tarballs/go2 -O ~/script/go2 --no-proxy
+echo 'export PATH="$PATH:$HOME/script"' >> ~/.bashrc
+chmod 755 $HOME/script/go2
+source $HOME/.bashrc && echo "script got executed"
